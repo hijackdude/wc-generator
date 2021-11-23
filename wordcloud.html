@@ -1,0 +1,225 @@
+<html lang="zh">
+<head>
+	<meta charset="utf-8">
+	<title>兴趣词云</title>
+</head>
+<script type="text/css" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"></script>
+<style type="text/css"> 
+ #wordcloud_interests {
+	height:600px;
+}  
+   body {
+		background-color: #483D8B;
+		}
+		#wrapper {
+	    padding-top: 8%;
+		}
+		.quoteDiv {
+        margin: 5 auto;
+        text-align: center;
+			}
+    .buttonDiv {
+        margin: 0 auto;
+      }
+      .sourcePrint {
+        width: 79%;
+        text-align: right;
+        color: white;
+        font-family: 'Lora', serif;
+        padding: 1.5em 0;
+      }
+      .quotePrint {
+        font-size: 3em;
+        color: white;
+        font-family: 'Lora', serif;
+        width: 80%;
+        margin: 0 auto;
+        max-height: 200px;
+      }
+      button {
+        border: white solid 3px;
+        background-color: #48c465;
+        color: white;
+        border-radius: 5px;
+        font-family: 'Lora', serif;
+        height: 4rem;
+        width: 16rem;
+        font-size: 1.5rem;
+        display: block;
+        margin: 0 auto;
+        outline:none;
+      }
+
+    </style>     
+
+ 
+<body>
+    <div id="wordcloud_interests"></div>
+    <div id='wrapper'></div>
+    <div class='quoteDiv'>
+      <h2 class='quotePrint'></h2>
+      <h3 class='sourcePrint'></h3>
+  </div>
+  <div class='buttonDiv'>
+          <button class='quoteButton'>面试片汤话</button>
+  </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0.rc2/echarts.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://duxcharts.oss-cn-beijing.aliyuncs.com/js/echarts-wordcloud.js"></script>
+    <script type="text/javascript" src="theme.js"></script>
+    <script type="text/javascript" src="charts.js"></script>
+    <script type="text/javascript">
+if(document.getElementById('wordcloud_interests') ) {
+
+var keywords = [
+    {name: "负责", value: 22220},
+    {name: "产品", value: 13036},
+    {name: "工作", value: 10353},
+    {name: "业务", value: 9932},
+    {name: "优化", value: 9165},
+    {name: "设计", value: 8846},
+    {name: "运营", value: 8247},
+    {name: "开发", value: 8125},
+    {name: "需求", value: 7879},
+    {name: "技术", value: 7303},
+    {name: "项目", value: 7258},
+    {name: "平台", value: 7217},
+    {name: "用户", value: 7183},
+    {name: "团队", value: 6590},
+    {name: "提升", value: 6439},
+    {name: "系统", value: 6236},
+
+    {name: "数据", value: 6218},
+    {name: "游戏", value: 6129},
+    {name: "内容", value: 6125},
+    {name: "制定", value: 5907},
+    {name: "行业", value: 5236},
+
+    {name: "包括", value: 5119},
+    {name: "方案", value: 4836},
+    {name: "落地", value: 4705},
+    {name: "策略", value: 4617},
+    {name: "参与", value: 4333},
+    {name: "流程", value: 4245},
+    
+];
+
+var option = {
+    title:{
+      show: false,
+      text: "兴趣词云",
+      textStyle: {
+          color: '#666666',
+          fontSize: 30
+      }
+    },
+    tooltip:{
+          trigger: "item"
+    },
+    toolbox: {
+        show: true,
+        feature: {
+            dataView: {
+                show: true
+            },
+            restore: {
+                show: true
+            }
+        }
+    },
+    series: [ {
+        type: 'wordCloud',
+        sizeRange: [30, 200],
+        rotationRange: [-29, 29],
+        rotationStep: 30,
+        gridSize: 6,
+        // The shape of the "cloud" to draw. Can be any polar equation represented as a
+        // callback function, or a keyword present. Available presents are circle (default),
+        // cardioid (apple or heart shape curve, the most known polar equation), diamond (
+        // alias of square), triangle-forward, triangle, (alias of triangle-upright, pentagon, and star.
+        shape: 'diamond',
+        //maskImage: maskImage,
+        left: 'center',
+        top: 'center',
+        width: '80%',
+        height: '80%',
+        //right: null,
+        //bottom: null,
+        drawOutOfBound: false,
+        textStyle: {
+            normal: {
+                color: function () {
+                  // 随机从颜色序列中取色
+                  var index = Math.floor((Math.random()*colorOrder.length));
+                  //console.log('index:'+index);
+                  //console.log('colorOrder:'+colorOrder[index]);
+                  return colorOrder[index];
+                }
+        },
+            emphasis: {
+                color: '#60ACFC',
+                shadowBlur: 6,
+                shadowColor: '#dddddd'
+            }
+        },
+        data: keywords.sort(function (a, b) {
+            return b.value  - a.value;
+        })
+    } ]
+};
+var WordcloudInterests = echarts.init(document.getElementById('wordcloud_interests'));
+WordcloudInterests.setOption(option);
+// 浏览器窗口缩放，图表自动重绘适应浏览器窗口，codepen 中使用。
+window.onresize = function() {
+   WordcloudInterests.resize();
+}
+}
+    </script> 
+
+<script type= "text/javascript">
+    function generate() {
+    let quoteArray = [
+      {
+        quote: "\"我精通各种类型的产品，在过往的工作中取得了不小的成就\"",
+        source: "-产品，工作"
+      },
+      {
+        quote: "\"在过去的实习经历中，我负责的业务很多\"",
+        source: "-负责，业务"
+      },
+    ];
+    return quoteArray;
+    };
+    quoteArray = generate();
+    const quotePrint = document.querySelector('.quotePrint');
+    const sourcePrint = document.querySelector('.sourcePrint');
+    const quoteButton = document.querySelector('.quoteButton');
+    const body = document.querySelector('body');
+    quotePrint.textContent = "\"这个按钮用来干什么\"";
+    sourcePrint.textContent = "-水时间";
+    //function randomBackgroundColor() {
+    //var hexArray = ['a', 'b', 'c', 'd', 'e', 'f', 0, 1, 2, 3, 4, 5, 6, 7, 8, 9];
+      //var randomHex = '#';
+      ///for (let i = 0; i < 6; i++) {
+        //randomHex += hexArray[Math.floor(Math.random() * 16)]
+     //}
+     //quoteButton.style.backgroundColor = `${randomHex}`;
+     //body.style.backgroundColor = `${randomHex}`;
+    //}
+    quoteButton.addEventListener('click', () => {
+      if (quoteArray.length === 0) {
+        quoteArray = generate();
+      }
+      let indexPosition = Math.floor(Math.random() * (quoteArray.length));
+      let quote = quoteArray[indexPosition].quote;
+      let source = quoteArray[indexPosition].source;
+      quotePrint.textContent = quote;
+      sourcePrint.textContent = source;
+      let object = quoteArray.splice(indexPosition, 1);
+      randomBackgroundColor();
+    });
+        </script>
+</body>
+
+</html>
