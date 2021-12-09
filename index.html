@@ -170,7 +170,7 @@ var option = {
 };
 var WordcloudInterests = echarts.init(document.getElementById('wordcloud_interests'));
 WordcloudInterests.setOption(option);
-// 浏览器窗口缩放，图表自动重绘适应浏览器窗口，codepen 中使用。
+// 浏览器窗口缩放，图表自动重绘适应浏览器窗口
 window.onresize = function() {
    WordcloudInterests.resize();
 }
