@@ -1,9 +1,3 @@
-// charts_common.js
-// https://codepen.io/thirtyjin/pen/OwJJON
-//
-// 公用变量
-//
-
 // 默认主题
 var themename = 'dux';
 
